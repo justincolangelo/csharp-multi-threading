@@ -27,11 +27,15 @@ namespace MultiThreadingExample
             try
             {
                 // this is a bad idea, just seeing if exception catches
-                childThread.Abort();
+                childThread.Interrupt();
             }
             catch(PlatformNotSupportedException ex)
             {
                 Console.WriteLine($"\nPlatformNotSupportedException: {ex.Message}");
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine($"\nException: {ex.Message}");
             }
             finally
             {
@@ -53,9 +57,9 @@ namespace MultiThreadingExample
                 }
                 Console.WriteLine("Child Thread Completed");
             }
-            catch(ThreadAbortException ex)
+            catch(ThreadInterruptedException ex)
             {
-                Console.WriteLine($"\nThread Abort Exception: {ex.Message}");
+                Console.WriteLine($"\nThread Interrupted Exception: {ex.Message}");
             }
             finally
             {
